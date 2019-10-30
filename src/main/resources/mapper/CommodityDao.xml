@@ -4,7 +4,39 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jellyfishmix.gouhaitakeaway.dao.CommodityDao">
     <select id="queryCommodityList" resultType="com.jellyfishmix.gouhaitakeaway.entity.Commodity">
-        select commodity_id `id`, commodity_name `name`, original_price, current_price, enable, commodity_describe `describe`, commodity_sum `sum`, is_under_revision, is_see_more, img_url
+        select
+        commodity_id `id`,
+        commodity_name `name`,
+        original_price,
+         current_price,
+         enable,
+         commodity_describe `describe`,
+         commodity_sum `sum`,
+         is_under_revision,
+         is_see_more, img_url
         from commodity
     </select>
+
+    <insert id="insertCommodity" useGeneratedKeys="true" keyColumn="commodity_id" keyProperty="id">
+        insert into
+        commodity(commodity_name, original_price, current_price, enable, commodity_describe, commodity_sum, is_under_revision, is_see_more, img_url)
+        value
+        (#{name}, #{originalPrice}, #{currentPrice}, #{enable}, #{describe}, #{sum}, #{isUnderRevision}, #{isSeeMore}, #{imgURL})
+    </insert>
+
+    <update id="updateCommodity" parameterType="com.jellyfishmix.gouhaitakeaway.entity.Commodity">
+        update commodity
+--         MySQL动态SQL
+        <set>
+            <if test="name != null">commodity_name=#{name},</if>
+            <if test="originalPrice != null">original_price=#{originalPrice},</if>
+            <if test="currentPrice != null">current_price=#{currentPrice},</if>
+            <if test="enable != null">enable=#{enable},</if>
+            <if test="describe != null">commodity_describe=#{describe},</if>
+            <if test="sum != null">commodity_sum=#{sum},</if>
+            <if test="isUnderRevision != null">is_under_revision=#{isUnderRevision},</if>
+            <if test="isSeeMore != null">is_see_more=#{isSeeMore}</if>
+        </set>
+        where commodity_id=#{id}
+    </update>
 </mapper>
