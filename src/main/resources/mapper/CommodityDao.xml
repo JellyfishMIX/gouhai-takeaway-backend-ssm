@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jellyfishmix.gouhaitakeaway.dao.CommodityDao">
+    <select id="queryCommodityList" resultType="com.jellyfishmix.gouhaitakeaway.entity.Commodity">
+        select commodity_id `id`, commodity_name `name`, original_price, current_price, enable, commodity_describe `describe`, commodity_sum `sum`, is_under_revision, is_see_more, img_url
+        from commodity
+    </select>
+</mapper>
