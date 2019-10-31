@@ -3,6 +3,14 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jellyfishmix.gouhaitakeaway.dao.CommodityDao">
+    <!--新建商品-->
+    <insert id="insertCommodity" useGeneratedKeys="true" keyColumn="commodity_id" keyProperty="id">
+        insert into
+        commodity(commodity_name, original_price, current_price, enable, commodity_describe, commodity_sum, is_under_revision, is_see_more, img_url)
+        value
+        (#{name}, #{originalPrice}, #{currentPrice}, #{enable}, #{describe}, #{sum}, #{isUnderRevision}, #{isSeeMore}, #{imgURL})
+    </insert>
+    <!--查询商品，返回商品列表-->
     <select id="queryCommodityList" resultType="com.jellyfishmix.gouhaitakeaway.entity.Commodity">
         select
         commodity_id `id`,
@@ -17,13 +25,7 @@
         from commodity
     </select>
 
-    <insert id="insertCommodity" useGeneratedKeys="true" keyColumn="commodity_id" keyProperty="id">
-        insert into
-        commodity(commodity_name, original_price, current_price, enable, commodity_describe, commodity_sum, is_under_revision, is_see_more, img_url)
-        value
-        (#{name}, #{originalPrice}, #{currentPrice}, #{enable}, #{describe}, #{sum}, #{isUnderRevision}, #{isSeeMore}, #{imgURL})
-    </insert>
-
+    <!--修改商品-->
     <update id="updateCommodity" parameterType="com.jellyfishmix.gouhaitakeaway.entity.Commodity">
         update commodity
 --         MySQL动态SQL
@@ -39,4 +41,10 @@
         </set>
         where commodity_id=#{id}
     </update>
+
+    <!--删除商品-->
+    <delete id="deleteCommodity" parameterType="com.jellyfishmix.gouhaitakeaway.entity.Commodity">
+        delete from commodity
+        where commodity_id=#{id}
+    </delete>
 </mapper>

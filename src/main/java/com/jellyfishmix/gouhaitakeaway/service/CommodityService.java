@@ -24,4 +24,11 @@ public interface CommodityService {
      * @return
      */
     int updateCommodity(Commodity commodity);
+
+    /**
+     * 删除商品
+     * @param commodity
+     * @return
+     */
+    int deleteCommodity(Commodity commodity);
 }

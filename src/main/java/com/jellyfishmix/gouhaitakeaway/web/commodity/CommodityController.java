@@ -60,7 +60,6 @@ public class CommodityController {
             commodity = objectMapper.readValue(commodityStr, Commodity.class);
             int effectedNum = commodityService.insertCommodity(commodity);
             modelMap.put("success", true);
-            modelMap.put("effectedNum", effectedNum);
             return modelMap;
         } catch (Exception e) {
             modelMap.put("success", false);
@@ -86,7 +85,31 @@ public class CommodityController {
             commodity = objectMapper.readValue(commodityStr, Commodity.class);
             int effectedNum = commodityService.updateCommodity(commodity);
             modelMap.put("success", true);
-            modelMap.put("effectedNum", effectedNum);
+            return modelMap;
+        } catch (Exception e) {
+            modelMap.put("success", false);
+            modelMap.put("errMsg", e.toString());
+            return modelMap;
+        }
+    }
+
+    /**
+     * 删除商品
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/deletecommodity", method = RequestMethod.POST)
+    @ResponseBody
+    private Map<String, Object> deleteCommodity(HttpServletRequest request) {
+        Map<String, Object> modelMap = new HashMap<String, Object>();
+
+        String commodityStr = HttpServletRequestUtil.getString(request, "commodityStr");
+        ObjectMapper objectMapper = new ObjectMapper();
+        Commodity commodity = null;
+        try {
+            commodity = objectMapper.readValue(commodityStr, Commodity.class);
+            int effectNum = commodityService.deleteCommodity(commodity);
+            modelMap.put("success", true);
             return modelMap;
         } catch (Exception e) {
             modelMap.put("success", false);
