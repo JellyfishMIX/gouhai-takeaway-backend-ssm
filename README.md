@@ -3,6 +3,8 @@ Backend in SSM of gouhai-takeaway. The project has been successfully released, t
 
 ## Environmental parameters
 
+jdk@11.0.4
+
 ## Database
 
 MySQL@8.0.17
