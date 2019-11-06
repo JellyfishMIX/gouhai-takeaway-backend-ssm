@@ -5,6 +5,10 @@ Backend in SSM of gouhai-takeaway. The project has been successfully released, t
 
 jdk@11.0.4
 
+
+# Server
+tomcat@9.0.26
+
 ## Database
 
 MySQL@8.0.17
