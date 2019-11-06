@@ -1,7 +1,7 @@
 # gouhai-takeaway-backend-ssm
 Backend in SSM of gouhai-takeaway. The project has been successfully released, this is the backend SSM version.
 
-## Environmental parameters
+## Environmental Parameters
 
 jdk@11.0.4
 
