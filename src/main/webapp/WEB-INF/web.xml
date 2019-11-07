@@ -21,6 +21,7 @@
 
     <!--可以设定多个<welcome-file>xxxx.html/xxxx.jsp</welcome-file>，当输入域名时，如果第一行的首页没有，就进入第二个-->
     <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
     <servlet>
