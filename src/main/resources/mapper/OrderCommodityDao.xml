@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jellyfishmix.gouhaitakeaway.dao.OrderCommodityDao">
+    <insert id="batchInsertOrderCommodity" parameterType="java.util.List">
+        insert into
+        tb_order_commodity(commodity_name, original_price, unit_price, quantity, total_price, order_id)
+        values
+        <foreach collection="list" item="orderCommodity" index="index" separator=",">
+            (#{orderCommodity.commodityName}, #{orderCommodity.originalPrice}, #{orderCommodity.unitPrice}, #{orderCommodity.quantity}, #{orderCommodity.totalPrice}, #{orderCommodity.orderId})
+        </foreach>
+    </insert>
+</mapper>
