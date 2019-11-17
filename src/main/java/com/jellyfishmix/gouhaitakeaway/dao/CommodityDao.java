@@ -12,7 +12,7 @@ public interface CommodityDao {
     List<Commodity> queryCommodityList();
 
     /**
-     * 新增商品，返回值1为成功，-1为失败
+     * 添加商品，返回值1为成功，-1为失败
      * @param commodity
      * @return
      */

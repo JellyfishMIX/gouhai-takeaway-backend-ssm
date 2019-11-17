@@ -1,5 +1,6 @@
 package com.jellyfishmix.gouhaitakeaway.service;
 
+import com.jellyfishmix.gouhaitakeaway.dto.CommodityExecution;
 import com.jellyfishmix.gouhaitakeaway.entity.Commodity;
 
 import java.util.List;
@@ -12,23 +13,23 @@ public interface CommodityService {
     List<Commodity> getCommodityList();
 
     /**
-     * 新增商品，返回值1为成功，-1为失败
+     * 添加商品
      * @param commodity
      * @return int
      */
-    int insertCommodity(Commodity commodity);
+    CommodityExecution addCommodity(Commodity commodity);
 
     /**
      * 修改商品
      * @param commodity
      * @return
      */
-    int updateCommodity(Commodity commodity);
+    CommodityExecution updateCommodity(Commodity commodity);
 
     /**
      * 删除商品
      * @param commodity
      * @return
      */
-    int deleteCommodity(Commodity commodity);
+    CommodityExecution deleteCommodity(Commodity commodity);
 }

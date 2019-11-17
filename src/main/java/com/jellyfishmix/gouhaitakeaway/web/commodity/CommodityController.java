@@ -1,9 +1,9 @@
 package com.jellyfishmix.gouhaitakeaway.web.commodity;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.jellyfishmix.gouhaitakeaway.dto.CommodityExecution;
 import com.jellyfishmix.gouhaitakeaway.entity.Commodity;
+import com.jellyfishmix.gouhaitakeaway.enums.CommodityStateEnum;
 import com.jellyfishmix.gouhaitakeaway.service.CommodityService;
-import com.jellyfishmix.gouhaitakeaway.util.HttpServletRequestUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -44,45 +43,27 @@ public class CommodityController {
         return modelMap;
     }
 
-    // /**
-    //  * 新增商品
-    //  * @param request
-    //  * @return
-    //  */
-    // @RequestMapping(value = "/addcommodity", method = RequestMethod.POST)
-    // @ResponseBody
-    // private Map<String, Object> insertCommodity(HttpServletRequest request) {
-    //     Map<String, Object> modelMap = new HashMap<String, Object>();
-    //
-    //     String commodityStr = HttpServletRequestUtil.getString(request, "commodityStr");
-    //     ObjectMapper objectMapper = new ObjectMapper();
-    //     Commodity commodity = null;
-    //     try {
-    //         commodity = objectMapper.readValue(commodityStr, Commodity.class);
-    //         int effectedNum = commodityService.insertCommodity(commodity);
-    //         modelMap.put("success", true);
-    //         return modelMap;
-    //     } catch (Exception e) {
-    //         modelMap.put("success", false);
-    //         modelMap.put("errMsg", e.toString());
-    //         return modelMap;
-    //     }
-    // }
-
     /**
-     * 新增商品
+     * 添加商品
      * @param commodity
      * @return
      */
     @RequestMapping(value = "/addcommodity", method = RequestMethod.POST)
     @ResponseBody
-    private Map<String, Object> insertCommodity(@RequestBody Commodity commodity) {
+    private Map<String, Object> addCommodity(@RequestBody Commodity commodity) {
         Map<String, Object> modelMap = new HashMap<String, Object>();
 
         try {
-            int effectedNum = commodityService.insertCommodity(commodity);
-            modelMap.put("success", true);
-            return modelMap;
+            CommodityExecution commodityExecution = commodityService.addCommodity(commodity);
+            if (commodityExecution.getState() == CommodityStateEnum.SUCCESS.getState()) {
+                modelMap.put("success", true);
+                return modelMap;
+            } else {
+                modelMap.put("success", false);
+                modelMap.put("errState", commodityExecution.getState());
+                modelMap.put("errStateInfo", commodityExecution.getStateInfo());
+                return modelMap;
+            }
         } catch (Exception e) {
             modelMap.put("success", false);
             modelMap.put("errMsg", e.toString());
@@ -101,40 +82,22 @@ public class CommodityController {
         Map<String, Object> modelMap = new HashMap<String, Object>();
 
         try {
-            int effectedNum = commodityService.updateCommodity(commodity);
-            modelMap.put("success", true);
-            return modelMap;
+            CommodityExecution commodityExecution = commodityService.updateCommodity(commodity);
+            if (commodityExecution.getState() == CommodityStateEnum.SUCCESS.getState()) {
+                modelMap.put("success", true);
+                return modelMap;
+            } else {
+                modelMap.put("success", false);
+                modelMap.put("errState", commodityExecution.getState());
+                modelMap.put("errStateInfo", commodityExecution.getStateInfo());
+                return modelMap;
+            }
         } catch (Exception e) {
             modelMap.put("success", false);
             modelMap.put("errMsg", e.toString());
             return modelMap;
         }
     }
-
-    // /**
-    //  * 删除商品
-    //  * @param request
-    //  * @return
-    //  */
-    // @RequestMapping(value = "/deletecommodity", method = RequestMethod.POST)
-    // @ResponseBody
-    // private Map<String, Object> deleteCommodity(HttpServletRequest request) {
-    //     Map<String, Object> modelMap = new HashMap<String, Object>();
-    //
-    //     String commodityStr = HttpServletRequestUtil.getString(request, "commodityStr");
-    //     ObjectMapper objectMapper = new ObjectMapper();
-    //     Commodity commodity = null;
-    //     try {
-    //         commodity = objectMapper.readValue(commodityStr, Commodity.class);
-    //         int effectNum = commodityService.deleteCommodity(commodity);
-    //         modelMap.put("success", true);
-    //         return modelMap;
-    //     } catch (Exception e) {
-    //         modelMap.put("success", false);
-    //         modelMap.put("errMsg", e.toString());
-    //         return modelMap;
-    //     }
-    // }
 
     /**
      * 删除商品
@@ -147,9 +110,16 @@ public class CommodityController {
         Map<String, Object> modelMap = new HashMap<String, Object>();
 
         try {
-            int effectNum = commodityService.deleteCommodity(commodity);
-            modelMap.put("success", true);
-            return modelMap;
+            CommodityExecution commodityExecution = commodityService.deleteCommodity(commodity);
+            if (commodityExecution.getState() == CommodityStateEnum.SUCCESS.getState()) {
+                modelMap.put("success", true);
+                return modelMap;
+            } else {
+                modelMap.put("success", false);
+                modelMap.put("errState", commodityExecution.getState());
+                modelMap.put("errStateInfo", commodityExecution.getStateInfo());
+                return modelMap;
+            }
         } catch (Exception e) {
             modelMap.put("success", false);
             modelMap.put("errMsg", e.toString());
