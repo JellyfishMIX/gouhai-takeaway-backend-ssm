@@ -5,6 +5,7 @@ import com.jellyfishmix.gouhaitakeaway.dto.OrderExecution;
 import com.jellyfishmix.gouhaitakeaway.entity.Order;
 import com.jellyfishmix.gouhaitakeaway.entity.OrderCommodity;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,7 @@ public class OrderServiceTest extends BaseTest {
     private OrderService orderService;
 
     @Test
+    @Ignore
     public void testAddOrder() {
         Order order = new Order();
         order.setCustomerName("唐马儒");

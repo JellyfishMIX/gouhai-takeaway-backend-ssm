@@ -7,6 +7,8 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.List;
+
 public class OrderDaoTest extends BaseTest {
     @Autowired
     private OrderDao orderDao;
@@ -22,5 +24,12 @@ public class OrderDaoTest extends BaseTest {
 
         int effectedNum = orderDao.insertOrder(order);
         Assert.assertEquals(1, effectedNum);
+    }
+
+    @Test
+    @Ignore
+    public void testQueryOrderList() {
+        List<Order> orderList = orderDao.queryOrderList();
+        Assert.assertEquals(3, orderList.size());
     }
 }

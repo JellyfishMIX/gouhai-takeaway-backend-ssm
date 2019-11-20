@@ -17,12 +17,13 @@
         commodity_id `id`,
         commodity_name `name`,
         original_price,
-         current_price,
-         enable,
-         commodity_describe `describe`,
-         commodity_sum `sum`,
-         is_under_revision,
-         is_see_more, img_url
+        current_price,
+        enable,
+        commodity_describe `describe`,
+        commodity_sum `sum`,
+        is_under_revision,
+        is_see_more,
+        img_url
         from tb_commodity
     </select>
 

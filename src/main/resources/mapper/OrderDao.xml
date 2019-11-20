@@ -11,4 +11,43 @@
         values
         (#{customerName}, #{customerPhone}, #{customerAddr}, #{totalPrice})
     </insert>
+
+    <!--列出订单列表-->
+    <resultMap id="orderMap" type="com.jellyfishmix.gouhaitakeaway.entity.Order">
+        <result property="orderId" column="order_id" />
+        <result property="customerName" column="customer_name" />
+        <result property="customerPhone" column="customer_phone" />
+        <result property="customerAddr" column="customer_addr" />
+        <result property="totalPrice" column="total_price" />
+        <collection property="orderCommodityList" column="order_id" ofType="com.jellyfishmix.gouhaitakeaway.entity.OrderCommodity">
+            <id property="orderCommodityId" column="order_commodity_id" />
+            <result property="commodityName" column="commodity_name" />
+            <result property="originalPrice" column="original_price" />
+            <result property="unitPrice" column="unit_price" />
+            <result property="quantity" column="quantity" />
+            <result property="totalPrice" column="oc_total_price" />
+            <result property="orderId" column="oc_order_id" />
+        </collection>
+    </resultMap>
+    <select id="queryOrderList" resultMap="orderMap">
+        select
+        tb_order.order_id,
+        tb_order.customer_name,
+        tb_order.customer_phone,
+        tb_order.customer_addr,
+        tb_order.total_price,
+        tb_order_commodity.order_commodity_id,
+        tb_order_commodity.commodity_name,
+        tb_order_commodity.original_price,
+        tb_order_commodity.unit_price,
+        tb_order_commodity.quantity,
+        tb_order_commodity.total_price as oc_total_price,
+        tb_order_commodity.order_id as oc_order_id
+        from
+        tb_order
+        left join
+        tb_order_commodity
+        on
+        tb_order.order_id = tb_order_commodity.order_id
+    </select>
 </mapper>
