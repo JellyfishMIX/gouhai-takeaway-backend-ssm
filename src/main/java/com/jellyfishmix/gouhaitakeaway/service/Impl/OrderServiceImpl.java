@@ -4,6 +4,7 @@ import com.jellyfishmix.gouhaitakeaway.dao.OrderCommodityDao;
 import com.jellyfishmix.gouhaitakeaway.dao.OrderDao;
 import com.jellyfishmix.gouhaitakeaway.dto.OrderExecution;
 import com.jellyfishmix.gouhaitakeaway.entity.Order;
+import com.jellyfishmix.gouhaitakeaway.entity.OrderCommodity;
 import com.jellyfishmix.gouhaitakeaway.enums.OrderStateEnum;
 import com.jellyfishmix.gouhaitakeaway.exceptions.OrderOperationException;
 import com.jellyfishmix.gouhaitakeaway.service.OrderService;
@@ -26,6 +27,9 @@ public class OrderServiceImpl implements OrderService {
                 int effectedNum1 = orderDao.insertOrder(order);
                 if (effectedNum1 <= 0) {
                     throw new OrderOperationException("添加订单失败");
+                }
+                for (OrderCommodity orderCommodity : order.getOrderCommodityList()) {
+                    orderCommodity.setOrderId(order.getOrderId());
                 }
                 int effectedNum2 = orderCommodityDao.batchInsertOrderCommodity(order.getOrderCommodityList());
                 if (effectedNum2 <= 0) {
