@@ -7,7 +7,7 @@ public class Order {
     // 使用引用类型的原因：避免基础类型导致的被赋默认值
     private Long orderId;
     private String customerName;
-    private Long customerPhone;
+    private String customerPhone;
     private String customerAddr;
     private Integer totalPrice;
     private Date createTime;
@@ -23,11 +23,11 @@ public class Order {
         this.orderId = orderId;
     }
 
-    public Long getCustomerPhone() {
+    public String getCustomerPhone() {
         return customerPhone;
     }
 
-    public void setCustomerPhone(Long customerPhone) {
+    public void setCustomerPhone(String customerPhone) {
         this.customerPhone = customerPhone;
     }
 

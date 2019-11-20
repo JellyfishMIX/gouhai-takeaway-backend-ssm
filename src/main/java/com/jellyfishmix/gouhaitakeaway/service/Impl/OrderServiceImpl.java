@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional
 public class OrderServiceImpl implements OrderService {
@@ -20,6 +22,12 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private OrderCommodityDao orderCommodityDao;
 
+    /**
+     * 新增订单
+     * @param order
+     * @return
+     */
+    @Override
     // 新增订单，并将订单中的商品列表批量添加进数据库
     public OrderExecution addOrder(Order order) {
         if (order != null) {
@@ -41,6 +49,20 @@ public class OrderServiceImpl implements OrderService {
             return new OrderExecution(OrderStateEnum.SUCCESS);
         } else {
             return new OrderExecution(OrderStateEnum.EMPTY);
+        }
+    }
+
+    /**
+     * 获取订单列表
+     * @return
+     */
+    @Override
+    public List<Order> getOrderList() {
+        List<Order> orderList = orderDao.queryOrderList();
+        if (orderList != null && orderList.size() > 0) {
+            return orderList;
+        } else {
+            throw new OrderOperationException("获取订单列表失败");
         }
     }
 }

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -39,6 +40,24 @@ public class OrderController {
         } catch (Exception e) {
             modelMap.put("success", false);
             modelMap.put("errMsg: ", e.toString());
+            return modelMap;
+        }
+    }
+
+    @RequestMapping(value = "/getorderlist", method = RequestMethod.GET)
+    @ResponseBody
+    private Map<String, Object> getOrderList() {
+        Map<String, Object> modelMap = new HashMap<>();
+        List<Order> orderList;
+
+        try {
+            orderList = orderService.getOrderList();
+            modelMap.put("success", true);
+            modelMap.put("orderList", orderList);
+            return modelMap;
+        } catch (Exception e) {
+            modelMap.put("success", false);
+            modelMap.put("errMsg", e.toString());
             return modelMap;
         }
     }

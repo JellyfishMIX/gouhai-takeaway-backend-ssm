@@ -24,7 +24,7 @@ public class OrderServiceTest extends BaseTest {
     public void testAddOrder() {
         Order order = new Order();
         order.setCustomerName("刘七");
-        order.setCustomerPhone(13315766783L);
+        order.setCustomerPhone("13315766783");
         order.setCustomerAddr("河北农业大学渤海校区");
         order.setTotalPrice(23);
         order.setCreateTime(new Date());

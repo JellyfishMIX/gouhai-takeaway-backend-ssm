@@ -19,7 +19,7 @@ public class OrderDaoTest extends BaseTest {
     public void testInsertOrder() {
         Order order = new Order();
         order.setCustomerName("张全蛋");
-        order.setCustomerPhone(13315766783L);
+        order.setCustomerPhone("13315766783");
         order.setCustomerAddr("河北农业大学渤海校区");
         order.setTotalPrice(23);
         order.setCreateTime(new Date());

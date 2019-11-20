@@ -19,7 +19,7 @@
      sum: int,	// 商品选购总和
      isUnderRevision: boolean,	// 是否处于编辑模式下
      isSeeMore: boolean,	// 是否处于气泡"查看更多"状态
-     imgURL: String,	// 图片地址
+     imgURL: String	// 图片地址
    }
    ```
 
@@ -43,7 +43,7 @@
      sum: int,	// 商品选购总和
      isUnderRevision: boolean,	// 是否处于编辑模式下
      isSeeMore: boolean,	// 是否处于气泡"查看更多"状态
-     imgURL: String,	// 图片地址
+     imgURL: String	// 图片地址
    }
    ```
 
@@ -68,7 +68,7 @@
      sum: int,	// 商品选购总和
      isUnderRevision: boolean,	// 是否处于编辑模式下
      isSeeMore: boolean,	// 是否处于气泡"查看更多"状态
-     imgURL: String,	// 图片地址
+     imgURL: String	// 图片地址
    }
    ```
 
@@ -110,13 +110,52 @@
        originalPrice: int, // 原价
        unitPrice: int,	// 单价，即现价
        quantity: int,	// 数量
-       totalPrice: int,	// 单项合计
+       totalPrice: int	// 单项合计
      },{
        commodityName: String,	// 商品名字
        originalPrice: int, // 原价
        unitPrice: int,	// 单价，即现价
        quantity: int,	// 数量
-       totalPrice: int,	// 单项合计
+       totalPrice: int	// 单项合计
      }]
    }
    ```
+
+
+
+6. 获取订单
+
+   URL:  http://39.97.254.25:8080/gouhai-takeaway/#/api/order/getorderlist
+
+   Method: GET
+
+   Response:
+
+   ```
+   {
+   	orderId: long,	// 订单Id
+     customerName: String,	// 顾客姓名
+     customerPhone: String,	// 顾客手机号，请注意，该属性的值的数据类型为字符串
+     customerAddr: String,	// 顾客地址
+     totalPrice: int,	// 总价
+     // 订单已购商品列表
+     orderCommodityList: [{
+       orderCommodityId: long,	// 订单商品Id
+       commodityName: String,	// 商品名字
+       originalPrice: int, // 原价
+       unitPrice: int,	// 单价，即现价
+       quantity: int,	// 数量
+       totalPrice: int,	// 单项合计
+       orderId: long	// 此订单商品的所属订单的Id
+     },{
+     	orderCommodityId: long,	// 订单商品Id
+       commodityName: String,	// 商品名字
+       originalPrice: int, // 原价
+       unitPrice: int,	// 单价，即现价
+       quantity: int,	// 数量
+       totalPrice: int,	// 单项合计
+       orderId: long	// 此订单商品的所属订单的Id
+     }]
+   }
+   ```
+

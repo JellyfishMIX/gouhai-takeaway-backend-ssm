@@ -2,7 +2,7 @@ package com.jellyfishmix.gouhaitakeaway.entity;
 
 public class Commodity {
     // 使用引用类型的原因：避免基础类型导致的被赋默认值
-    private Integer id;
+    private Long id;
     private String name;
     private Integer originalPrice;
     private Integer currentPrice;
@@ -15,11 +15,11 @@ public class Commodity {
 
     // Getter & Setter
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
