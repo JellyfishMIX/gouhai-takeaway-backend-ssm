@@ -7,9 +7,9 @@
     <!--useGeneratedKeys="true"，SQL执行成功后，会把keyColumn的值赋值给keyProperty-->
     <insert id="insertOrder" parameterType="com.jellyfishmix.gouhaitakeaway.entity.Order" useGeneratedKeys="true" keyProperty="orderId" keyColumn="order_id">
         insert into
-        tb_order(customer_name, customer_phone, customer_addr, total_price)
+        tb_order(customer_name, customer_phone, customer_addr, total_price, create_time)
         values
-        (#{customerName}, #{customerPhone}, #{customerAddr}, #{totalPrice})
+        (#{customerName}, #{customerPhone}, #{customerAddr}, #{totalPrice}, #{createTime})
     </insert>
 
     <!--列出订单列表-->
@@ -19,6 +19,7 @@
         <result property="customerPhone" column="customer_phone" />
         <result property="customerAddr" column="customer_addr" />
         <result property="totalPrice" column="total_price" />
+        <result property="createTime" column="create_time" />
         <collection property="orderCommodityList" column="order_id" ofType="com.jellyfishmix.gouhaitakeaway.entity.OrderCommodity">
             <id property="orderCommodityId" column="order_commodity_id" />
             <result property="commodityName" column="commodity_name" />
@@ -36,6 +37,7 @@
         tb_order.customer_phone,
         tb_order.customer_addr,
         tb_order.total_price,
+        tb_order.create_time,
         tb_order_commodity.order_commodity_id,
         tb_order_commodity.commodity_name,
         tb_order_commodity.original_price,

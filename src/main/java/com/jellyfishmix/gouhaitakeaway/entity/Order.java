@@ -1,5 +1,6 @@
 package com.jellyfishmix.gouhaitakeaway.entity;
 
+import java.util.Date;
 import java.util.List;
 
 public class Order {
@@ -9,6 +10,7 @@ public class Order {
     private Long customerPhone;
     private String customerAddr;
     private Integer totalPrice;
+    private Date createTime;
     private List<OrderCommodity> orderCommodityList;
 
     // Getter & Setter
@@ -37,6 +39,14 @@ public class Order {
         this.customerName = customerName;
     }
 
+    public String getCustomerAddr() {
+        return customerAddr;
+    }
+
+    public void setCustomerAddr(String customerAddr) {
+        this.customerAddr = customerAddr;
+    }
+
     public Integer getTotalPrice() {
         return totalPrice;
     }
@@ -45,12 +55,12 @@ public class Order {
         this.totalPrice = totalPrice;
     }
 
-    public String getCustomerAddr() {
-        return customerAddr;
+    public Date getCreateTime() {
+        return createTime;
     }
 
-    public void setCustomerAddr(String customerAddr) {
-        this.customerAddr = customerAddr;
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
     public List<OrderCommodity> getOrderCommodityList() {

@@ -7,6 +7,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.Date;
 import java.util.List;
 
 public class OrderDaoTest extends BaseTest {
@@ -21,6 +22,7 @@ public class OrderDaoTest extends BaseTest {
         order.setCustomerPhone(13315766783L);
         order.setCustomerAddr("河北农业大学渤海校区");
         order.setTotalPrice(23);
+        order.setCreateTime(new Date());
 
         int effectedNum = orderDao.insertOrder(order);
         Assert.assertEquals(1, effectedNum);
@@ -30,6 +32,6 @@ public class OrderDaoTest extends BaseTest {
     @Ignore
     public void testQueryOrderList() {
         List<Order> orderList = orderDao.queryOrderList();
-        Assert.assertEquals(3, orderList.size());
+        Assert.assertEquals(4, orderList.size());
     }
 }

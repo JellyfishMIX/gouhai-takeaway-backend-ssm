@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -22,20 +23,21 @@ public class OrderServiceTest extends BaseTest {
     @Ignore
     public void testAddOrder() {
         Order order = new Order();
-        order.setCustomerName("唐马儒");
+        order.setCustomerName("刘七");
         order.setCustomerPhone(13315766783L);
         order.setCustomerAddr("河北农业大学渤海校区");
         order.setTotalPrice(23);
+        order.setCreateTime(new Date());
 
         OrderCommodity orderCommodity1 = new OrderCommodity();
-        orderCommodity1.setCommodityName("鸡排饭");
+        orderCommodity1.setCommodityName("鸭片饭");
         orderCommodity1.setOriginalPrice(12);
         orderCommodity1.setUnitPrice(10);
         orderCommodity1.setQuantity(2);
         orderCommodity1.setTotalPrice(20);
         orderCommodity1.setOrderId(1L);
         OrderCommodity orderCommodity2 = new OrderCommodity();
-        orderCommodity2.setCommodityName("鳕鱼饭");
+        orderCommodity2.setCommodityName("猪肉丸子饭");
         orderCommodity2.setOriginalPrice(7);
         orderCommodity2.setUnitPrice(5);
         orderCommodity2.setQuantity(3);
