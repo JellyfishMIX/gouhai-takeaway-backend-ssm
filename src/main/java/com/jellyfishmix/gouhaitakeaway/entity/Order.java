@@ -1,5 +1,7 @@
 package com.jellyfishmix.gouhaitakeaway.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 import java.util.List;
 
@@ -10,6 +12,7 @@ public class Order {
     private String customerPhone;
     private String customerAddr;
     private Integer totalPrice;
+    @JsonFormat(pattern="yyyy-MM-dd   HH:mm:ss",timezone = "GMT+8")
     private Date createTime;
     private List<OrderCommodity> orderCommodityList;
 
