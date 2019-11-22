@@ -23,6 +23,7 @@ public class OrderDaoTest extends BaseTest {
         order.setCustomerAddr("河北农业大学渤海校区");
         order.setTotalPrice(23);
         order.setCreateTime(new Date());
+        order.setArrived(false);
 
         int effectedNum = orderDao.insertOrder(order);
         Assert.assertEquals(1, effectedNum);
@@ -32,6 +33,6 @@ public class OrderDaoTest extends BaseTest {
     @Ignore
     public void testQueryOrderList() {
         List<Order> orderList = orderDao.queryOrderList();
-        Assert.assertEquals(4, orderList.size());
+        Assert.assertEquals(5, orderList.size());
     }
 }

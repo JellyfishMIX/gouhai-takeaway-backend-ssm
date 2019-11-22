@@ -14,6 +14,7 @@ public class Order {
     private Integer totalPrice;
     @JsonFormat(pattern="yyyy-MM-dd   HH:mm:ss",timezone = "GMT+8")
     private Date createTime;
+    private Boolean isArrived;  // 订单是否已送达
     private List<OrderCommodity> orderCommodityList;
 
     // Getter & Setter
@@ -64,6 +65,14 @@ public class Order {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public Boolean getArrived() {
+        return isArrived;
+    }
+
+    public void setArrived(Boolean arrived) {
+        isArrived = arrived;
     }
 
     public List<OrderCommodity> getOrderCommodityList() {

@@ -104,6 +104,8 @@
      customerPhone: String,	// 顾客手机号，请注意，该属性的值的数据类型为字符串
      customerAddr: String,	// 顾客地址
      totalPrice: int,	// 总价
+     createTime: Date,	// 下单日期时间
+     isArrived,	// 订单是否已送达
      // 订单已购商品列表
      orderCommodityList: [{
        commodityName: String,	// 商品名字
@@ -138,6 +140,8 @@
      customerPhone: String,	// 顾客手机号，请注意，该属性的值的数据类型为字符串
      customerAddr: String,	// 顾客地址
      totalPrice: int,	// 总价
+     createTime: Date,	// 下单日期时间
+     isArrived,	// 订单是否已送达
      // 订单已购商品列表
      orderCommodityList: [{
        orderCommodityId: long,	// 订单商品Id
