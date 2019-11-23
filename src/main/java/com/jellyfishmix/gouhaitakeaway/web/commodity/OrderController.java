@@ -44,6 +44,30 @@ public class OrderController {
         }
     }
 
+    @RequestMapping(value = "/modifyordertoarrived", method = RequestMethod.POST)
+    @ResponseBody
+    private Map<String, Object> modifyOrderToArrived(@RequestBody Order order) {
+        Map<String, Object> modelMap = new HashMap<>();
+        OrderExecution orderExecution;
+
+        try {
+            orderExecution = orderService.modifyOrderToArrived(order);
+            if (orderExecution.getState() == OrderStateEnum.SUCCESS.getState()) {
+                modelMap.put("success", true);
+                return modelMap;
+            } else {
+                modelMap.put("success", false);
+                modelMap.put("errState", orderExecution.getState());
+                modelMap.put("errStateInfo", orderExecution.getStateInfo());
+                return modelMap;
+            }
+        } catch (Exception e) {
+            modelMap.put("success", false);
+            modelMap.put("errMsg", e.toString());
+            return modelMap;
+        }
+    }
+
     @RequestMapping(value = "/getorderlist", method = RequestMethod.GET)
     @ResponseBody
     private Map<String, Object> getOrderList() {

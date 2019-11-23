@@ -13,6 +13,13 @@ public interface OrderDao {
     int insertOrder(Order order);
 
     /**
+     * 修改订单
+     * @param order
+     * @return
+     */
+    int updateOrder(Order order);
+
+    /**
      * 列出订单列表
      */
     List<Order> queryOrderList();

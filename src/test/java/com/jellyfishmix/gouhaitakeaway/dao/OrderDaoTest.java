@@ -30,6 +30,15 @@ public class OrderDaoTest extends BaseTest {
     }
 
     @Test
+    public void testUpdateOrder() {
+        Order order = new Order();
+        order.setOrderId(1L);
+        order.setArrived(true);
+        int effectedNum = orderDao.updateOrder(order);
+        Assert.assertEquals(1, effectedNum);
+    }
+
+    @Test
     @Ignore
     public void testQueryOrderList() {
         List<Order> orderList = orderDao.queryOrderList();

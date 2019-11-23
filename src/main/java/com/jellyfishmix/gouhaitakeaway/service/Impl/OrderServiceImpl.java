@@ -52,6 +52,19 @@ public class OrderServiceImpl implements OrderService {
         }
     }
 
+    public OrderExecution modifyOrderToArrived(Order order) {
+        if (order != null) {
+            order.setArrived(true);
+            int effectedNum = orderDao.updateOrder(order);
+            if (effectedNum <= 0) {
+                throw new OrderOperationException("更新订单状态为已送达失败");
+            }
+            return new OrderExecution(OrderStateEnum.SUCCESS);
+        } else {
+            return new OrderExecution(OrderStateEnum.EMPTY);
+        }
+    }
+
     /**
      * 获取订单列表
      * @return
