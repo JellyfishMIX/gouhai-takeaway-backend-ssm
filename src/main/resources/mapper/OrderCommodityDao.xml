@@ -11,4 +11,10 @@
             (#{orderCommodity.commodityName}, #{orderCommodity.originalPrice}, #{orderCommodity.unitPrice}, #{orderCommodity.quantity}, #{orderCommodity.totalPrice}, #{orderCommodity.orderId})
         </foreach>
     </insert>
+
+    <!--删除orderId对应的orderCommodity-->
+    <delete id="deleteOrderCommodity" parameterType="com.jellyfishmix.gouhaitakeaway.entity.Order">
+        delete from tb_order_commodity
+        where order_id = #{orderId}
+    </delete>
 </mapper>
