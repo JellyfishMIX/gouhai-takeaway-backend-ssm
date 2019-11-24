@@ -4,6 +4,7 @@ import com.jellyfishmix.gouhaitakeaway.BaseTest;
 import com.jellyfishmix.gouhaitakeaway.dto.OrderExecution;
 import com.jellyfishmix.gouhaitakeaway.entity.Order;
 import com.jellyfishmix.gouhaitakeaway.entity.OrderCommodity;
+import com.jellyfishmix.gouhaitakeaway.enums.OrderStateEnum;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -51,5 +52,15 @@ public class OrderServiceTest extends BaseTest {
 
         OrderExecution orderExecution = orderService.addOrder(order);
         Assert.assertEquals(1, orderExecution.getState());
+    }
+
+    @Test
+    @Ignore
+    public void testDeleteOrder() {
+        Order order = new Order();
+        order.setOrderId(6L);
+
+        OrderExecution orderExecution = orderService.deleteOrder(order);
+        Assert.assertEquals(OrderStateEnum.SUCCESS.getState(), orderExecution.getState());
     }
 }

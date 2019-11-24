@@ -15,7 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-@Transactional
 public class OrderServiceImpl implements OrderService {
     @Autowired
     private OrderDao orderDao;
@@ -28,6 +27,7 @@ public class OrderServiceImpl implements OrderService {
      * @return
      */
     @Override
+    @Transactional
     // 新增订单，并将订单中的商品列表批量添加进数据库
     public OrderExecution addOrder(Order order) {
         if (order != null) {
@@ -52,12 +52,42 @@ public class OrderServiceImpl implements OrderService {
         }
     }
 
+    /**
+     * 删除订单及其关联的订单商品
+     * @param order
+     * @return
+     */
+    @Override
+    @Transactional
+    public OrderExecution deleteOrder(Order order) {
+        if (order != null) {
+            int effectedNum1 = orderCommodityDao.deleteOrderCommodity(order);
+            if (effectedNum1 <= 0) {
+                throw new OrderOperationException("删除订单所关联的订单商品失败");
+            }
+            int effectedNum2 = orderDao.deleteOrder(order);
+            if (effectedNum2 <= 0) {
+                throw new OrderOperationException("删除订单失败");
+            }
+            return new OrderExecution(OrderStateEnum.SUCCESS);
+        } else {
+            return new OrderExecution(OrderStateEnum.EMPTY);
+        }
+    }
+
+    /**
+     * 修改订单状态为已送达
+     * @param order
+     * @return
+     */
+    @Override
+    @Transactional
     public OrderExecution modifyOrderToArrived(Order order) {
         if (order != null) {
             order.setArrived(true);
             int effectedNum = orderDao.updateOrder(order);
             if (effectedNum <= 0) {
-                throw new OrderOperationException("更新订单状态为已送达失败");
+                throw new OrderOperationException("修改订单状态为已送达失败");
             }
             return new OrderExecution(OrderStateEnum.SUCCESS);
         } else {

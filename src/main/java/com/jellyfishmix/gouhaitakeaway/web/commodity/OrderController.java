@@ -21,6 +21,11 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
+    /**
+     * 新增订单
+     * @param order
+     * @return
+     */
     @RequestMapping(value = "/addorder", method = RequestMethod.POST)
     @ResponseBody
     private Map<String, Object> addOrder(@RequestBody Order order) {
@@ -44,6 +49,39 @@ public class OrderController {
         }
     }
 
+    /**
+     * 删除订单及其关联的订单商品
+     * @param order
+     * @return
+     */
+    @RequestMapping(value = "/deleteorder", method = RequestMethod.POST)
+    @ResponseBody
+    private Map<String, Object> deleteOrder(@RequestBody Order order) {
+        Map<String, Object> modelMap = new HashMap<>();
+
+        try {
+            OrderExecution orderExecution = orderService.deleteOrder(order);
+            if (orderExecution.getState() == OrderStateEnum.SUCCESS.getState()) {
+                modelMap.put("success", true);
+                return modelMap;
+            } else {
+                modelMap.put("success", false);
+                modelMap.put("errState", orderExecution.getState());
+                modelMap.put("errStateInfo", orderExecution.getStateInfo());
+                return modelMap;
+            }
+        } catch (Exception e) {
+            modelMap.put("success", false);
+            modelMap.put("errMsg", e.toString());
+            return modelMap;
+        }
+    }
+
+    /**
+     * 修改订单状态为已送达
+     * @param order
+     * @return
+     */
     @RequestMapping(value = "/modifyordertoarrived", method = RequestMethod.POST)
     @ResponseBody
     private Map<String, Object> modifyOrderToArrived(@RequestBody Order order) {
@@ -68,6 +106,10 @@ public class OrderController {
         }
     }
 
+    /**
+     * 获取订单列表
+     * @return
+     */
     @RequestMapping(value = "/getorderlist", method = RequestMethod.GET)
     @ResponseBody
     private Map<String, Object> getOrderList() {

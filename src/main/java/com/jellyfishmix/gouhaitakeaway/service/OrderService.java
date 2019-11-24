@@ -14,6 +14,13 @@ public interface OrderService {
     OrderExecution addOrder(Order order);
 
     /**
+     * 删除订单及其关联的订单商品
+     * @param order
+     * @return
+     */
+    OrderExecution deleteOrder(Order order);
+
+    /**
      * 修改订单状态为已送达
      * @param order
      * @return
