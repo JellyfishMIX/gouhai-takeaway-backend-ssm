@@ -1,5 +1,7 @@
 package com.jellyfishmix.gouhaitakeaway.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Commodity {
     // 使用引用类型的原因：避免基础类型导致的被赋默认值
     private Long id;
@@ -71,18 +73,22 @@ public class Commodity {
         this.sum = sum;
     }
 
+    @JsonProperty(value = "isUnderRevision")
     public Boolean getUnderRevision() {
         return isUnderRevision;
     }
 
+    @JsonProperty(value = "isUnderRevision")
     public void setUnderRevision(Boolean underRevision) {
         isUnderRevision = underRevision;
     }
 
+    @JsonProperty(value = "isSeeMore")
     public Boolean getSeeMore() {
         return isSeeMore;
     }
 
+    @JsonProperty(value = "isSeeMore")
     public void setSeeMore(Boolean seeMore) {
         isSeeMore = seeMore;
     }

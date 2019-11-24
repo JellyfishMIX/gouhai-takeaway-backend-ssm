@@ -63,4 +63,11 @@ public class OrderServiceTest extends BaseTest {
         OrderExecution orderExecution = orderService.deleteOrder(order);
         Assert.assertEquals(OrderStateEnum.SUCCESS.getState(), orderExecution.getState());
     }
+
+    @Test
+    @Ignore
+    public void testGetOrderList() {
+        List<Order> orderList = orderService.getOrderList();
+        Assert.assertEquals(4, orderList.size());
+    }
 }

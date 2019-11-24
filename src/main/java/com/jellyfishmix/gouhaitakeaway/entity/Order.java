@@ -1,6 +1,7 @@
 package com.jellyfishmix.gouhaitakeaway.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Date;
 import java.util.List;
@@ -67,10 +68,12 @@ public class Order {
         this.createTime = createTime;
     }
 
+    @JsonProperty(value = "isArrived")
     public Boolean getArrived() {
         return isArrived;
     }
 
+    @JsonProperty(value = "isArrived")
     public void setArrived(Boolean arrived) {
         isArrived = arrived;
     }
