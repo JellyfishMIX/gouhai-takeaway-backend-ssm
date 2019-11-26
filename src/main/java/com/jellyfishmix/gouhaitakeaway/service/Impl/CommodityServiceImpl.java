@@ -42,7 +42,7 @@ public class CommodityServiceImpl implements CommodityService {
             // 图像处理
             String targetPath = PathUtil.getCommodityImgPath();
             String imgRelativePath = ImageUtil.generateThumbnail(thumbnail, targetPath);
-            String imgURL = PathUtil.getImgBasePath() + imgRelativePath;
+            String imgURL = "http://39.97.254.25:8080/gouhai-takeaway/images" + imgRelativePath;
             commodity.setImgRelativePath(imgRelativePath);
             commodity.setImgURL(imgURL);
 

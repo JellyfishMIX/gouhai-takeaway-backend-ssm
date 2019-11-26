@@ -10,10 +10,10 @@ public class PathUtil {
         String basePath = "";
 
         if (os.toLowerCase().startsWith("win")) {
-            basePath = "D:/projectdev/java_image/gouhai-takeaway/";
+            basePath = "D:/projectdev/java_image/gouhai-takeaway";
         } else {
-            // basePath = "/Users/qianshijie/Programming/Backend/Java/Images/gouhai-takeaway/";
-            basePath = "/root/Programming/Server/Images/gouhai-takeaway/";
+            // basePath = "/Users/qianshijie/Programming/Backend/Java/Images/gouhai-takeaway";
+            basePath = "/root/Programming/Server/Images/gouhai-takeaway";
         }
         basePath = basePath.replace("/", separator);
         return basePath;
@@ -25,7 +25,7 @@ public class PathUtil {
      * @return
      */
     public static String getCommodityImgPath() {
-        String imagePath = "commodity/";
+        String imagePath = "/commodity/";
         return imagePath.replace("/", separator);
     }
 }

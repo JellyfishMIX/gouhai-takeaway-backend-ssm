@@ -14,6 +14,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -53,7 +54,7 @@ public class CommodityController {
      */
     @RequestMapping(value = "/addcommodity", method = RequestMethod.POST)
     @ResponseBody
-    private Map<String, Object> addCommodity(HttpServletRequest request) {
+    private Map<String, Object> addCommodity(HttpServletRequest request) throws UnsupportedEncodingException {
         Map<String, Object> modelMap = new HashMap<String, Object>();
         MultipartHttpServletRequest multipartHttpServletRequest;
         ImageHolder thumbnail;
@@ -84,36 +85,35 @@ public class CommodityController {
         }
 
         // entity处理
-        // String name = HttpServletRequestUtil.getString(request, "name");
-        // Integer originalPrice = HttpServletRequestUtil.getInt(request, "originalPrice");
-        // Integer currentPrice = HttpServletRequestUtil.getInt(request, "currentPrice");
-        // Boolean enable = HttpServletRequestUtil.getBoolean(request, "enable");
-        // String describe = HttpServletRequestUtil.getString(request, "describe");
-        // Integer sum = HttpServletRequestUtil.getInt(request, "sum");
-        // Boolean isUnderRevision = HttpServletRequestUtil.getBoolean(request, "isUnderRevision");
-        // Boolean isSeeMore = HttpServletRequestUtil.getBoolean(request, "isSeeMore");
-        // String imgURL = HttpServletRequestUtil.getString(request, "imgURL");
+        String name = HttpServletRequestUtil.getString(request, "name");
+        name = new String(name.getBytes("8859_1"), "utf8"); // 接收中文，转码
+        Integer originalPrice = HttpServletRequestUtil.getInt(request, "originalPrice");
+        Integer currentPrice = HttpServletRequestUtil.getInt(request, "currentPrice");
+        Boolean enable = HttpServletRequestUtil.getBoolean(request, "enable");
+        String describe = HttpServletRequestUtil.getString(request, "describe");    // 接收中文，转码
+        describe = new String(describe.getBytes("8859_1"), "utf8");
+        Integer sum = HttpServletRequestUtil.getInt(request, "sum");
+        Boolean isUnderRevision = HttpServletRequestUtil.getBoolean(request, "isUnderRevision");
+        Boolean isSeeMore = HttpServletRequestUtil.getBoolean(request, "isSeeMore");
 
         Commodity commodity = new Commodity();
-        // commodity.setName(name);
-        // commodity.setOriginalPrice(originalPrice);
-        // commodity.setCurrentPrice(currentPrice);
-        // commodity.setEnable(enable);
-        // commodity.setDescribe(describe);
-        // commodity.setSum(sum);
-        // commodity.setUnderRevision(isUnderRevision);
-        // commodity.setSeeMore(isSeeMore);
-        // commodity.setImgURL(imgURL);
+        commodity.setName(name);
+        commodity.setOriginalPrice(originalPrice);
+        commodity.setCurrentPrice(currentPrice);
+        commodity.setEnable(enable);
+        commodity.setDescribe(describe);
+        commodity.setSum(sum);
+        commodity.setUnderRevision(isUnderRevision);
+        commodity.setSeeMore(isSeeMore);
 
-        commodity.setName("红薯");
-        commodity.setOriginalPrice(10);
-        commodity.setCurrentPrice(8);
-        commodity.setEnable(true);
-        commodity.setDescribe("暂无描述");
-        commodity.setSum(1);
-        commodity.setUnderRevision(false);
-        commodity.setSeeMore(false);
-        commodity.setImgURL("sssr");
+        // commodity.setName("红薯");
+        // commodity.setOriginalPrice(10);
+        // commodity.setCurrentPrice(8);
+        // commodity.setEnable(true);
+        // commodity.setDescribe("暂无描述");
+        // commodity.setSum(1);
+        // commodity.setUnderRevision(false);
+        // commodity.setSeeMore(false);
 
         try {
             CommodityExecution commodityExecution = commodityService.addCommodity(commodity, thumbnail);
