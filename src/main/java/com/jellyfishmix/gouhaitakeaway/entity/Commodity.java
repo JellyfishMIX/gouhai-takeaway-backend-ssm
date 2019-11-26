@@ -14,6 +14,7 @@ public class Commodity {
     private Boolean isUnderRevision;
     private Boolean isSeeMore;
     private String imgURL;
+    private String imgRelativePath;
 
     // Getter & Setter
 
@@ -99,5 +100,13 @@ public class Commodity {
 
     public void setImgURL(String imgURL) {
         this.imgURL = imgURL;
+    }
+
+    public String getImgRelativePath() {
+        return imgRelativePath;
+    }
+
+    public void setImgRelativePath(String imgRelativePath) {
+        this.imgRelativePath = imgRelativePath;
     }
 }

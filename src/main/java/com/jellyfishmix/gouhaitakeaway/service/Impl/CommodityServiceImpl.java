@@ -2,10 +2,13 @@ package com.jellyfishmix.gouhaitakeaway.service.Impl;
 
 import com.jellyfishmix.gouhaitakeaway.dao.CommodityDao;
 import com.jellyfishmix.gouhaitakeaway.dto.CommodityExecution;
+import com.jellyfishmix.gouhaitakeaway.dto.ImageHolder;
 import com.jellyfishmix.gouhaitakeaway.entity.Commodity;
 import com.jellyfishmix.gouhaitakeaway.enums.CommodityStateEnum;
 import com.jellyfishmix.gouhaitakeaway.exceptions.CommodityOperationException;
 import com.jellyfishmix.gouhaitakeaway.service.CommodityService;
+import com.jellyfishmix.gouhaitakeaway.util.ImageUtil;
+import com.jellyfishmix.gouhaitakeaway.util.PathUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,9 +36,17 @@ public class CommodityServiceImpl implements CommodityService {
      */
     @Override
     @Transactional
-    public CommodityExecution addCommodity(Commodity commodity) {
+    public CommodityExecution addCommodity(Commodity commodity, ImageHolder thumbnail) {
         // 空值判断
         if (commodity != null) {
+            // 图像处理
+            String targetPath = PathUtil.getCommodityImgPath();
+            String imgRelativePath = ImageUtil.generateThumbnail(thumbnail, targetPath);
+            String imgURL = PathUtil.getImgBasePath() + imgRelativePath;
+            commodity.setImgRelativePath(imgRelativePath);
+            commodity.setImgURL(imgURL);
+
+            // 添加entity
             try {
                 int effectedNum = commodityDao.insertCommodity(commodity);
                 if (effectedNum <= 0) {
@@ -56,6 +67,7 @@ public class CommodityServiceImpl implements CommodityService {
      * @return
      */
     @Override
+    @Transactional
     public CommodityExecution updateCommodity(Commodity commodity) {
         if (commodity != null) {
             try {
@@ -78,6 +90,7 @@ public class CommodityServiceImpl implements CommodityService {
      * @return
      */
     @Override
+    @Transactional
     public CommodityExecution deleteCommodity(Commodity commodity) {
         if (commodity != null) {
             try {
@@ -85,6 +98,9 @@ public class CommodityServiceImpl implements CommodityService {
                 if (effectedNum <= 0) {
                     throw new CommodityOperationException("删除商品失败");
                 }
+                // 删除存储的图片
+                ImageUtil.deleteFileOrPath(commodity.getImgRelativePath());
+
                 return new CommodityExecution(CommodityStateEnum.SUCCESS);
             } catch (Exception e) {
                 throw new CommodityOperationException("删除商品失败，errMsg: " + e.toString());

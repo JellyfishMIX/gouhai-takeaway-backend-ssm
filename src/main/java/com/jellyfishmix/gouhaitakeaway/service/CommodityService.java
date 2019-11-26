@@ -1,6 +1,7 @@
 package com.jellyfishmix.gouhaitakeaway.service;
 
 import com.jellyfishmix.gouhaitakeaway.dto.CommodityExecution;
+import com.jellyfishmix.gouhaitakeaway.dto.ImageHolder;
 import com.jellyfishmix.gouhaitakeaway.entity.Commodity;
 
 import java.util.List;
@@ -15,9 +16,10 @@ public interface CommodityService {
     /**
      * 添加商品
      * @param commodity
+     * @param thumbnail
      * @return int
      */
-    CommodityExecution addCommodity(Commodity commodity);
+    CommodityExecution addCommodity(Commodity commodity, ImageHolder thumbnail);
 
     /**
      * 修改商品

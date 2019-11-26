@@ -30,6 +30,7 @@ public class OrderDaoTest extends BaseTest {
     }
 
     @Test
+    @Ignore
     public void testUpdateOrder() {
         Order order = new Order();
         order.setOrderId(1L);

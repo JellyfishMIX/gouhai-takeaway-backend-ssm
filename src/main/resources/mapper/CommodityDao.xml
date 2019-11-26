@@ -7,10 +7,11 @@
     <!--useGeneratedKeys="true"，SQL执行成功后，会把keyColumn的值赋值给keyProperty-->
     <insert id="insertCommodity" useGeneratedKeys="true" keyColumn="commodity_id" keyProperty="id">
         insert into
-        tb_commodity(commodity_name, original_price, current_price, enable, commodity_describe, commodity_sum, is_under_revision, is_see_more, img_url)
+        tb_commodity(commodity_name, original_price, current_price, enable, commodity_describe, commodity_sum, is_under_revision, is_see_more, img_url, img_relative_path)
         value
-        (#{name}, #{originalPrice}, #{currentPrice}, #{enable}, #{describe}, #{sum}, #{isUnderRevision}, #{isSeeMore}, #{imgURL})
+        (#{name}, #{originalPrice}, #{currentPrice}, #{enable}, #{describe}, #{sum}, #{isUnderRevision}, #{isSeeMore}, #{imgURL}, #{imgRelativePath})
     </insert>
+
     <!--查询商品，返回商品列表-->
     <select id="queryCommodityList" resultType="com.jellyfishmix.gouhaitakeaway.entity.Commodity">
         select
@@ -23,7 +24,8 @@
         commodity_sum `sum`,
         is_under_revision,
         is_see_more,
-        img_url
+        img_url,
+        img_relative_path
         from tb_commodity
     </select>
 

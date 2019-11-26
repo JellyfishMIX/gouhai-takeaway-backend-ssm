@@ -1,16 +1,19 @@
 package com.jellyfishmix.gouhaitakeaway.web.commodity;
 
 import com.jellyfishmix.gouhaitakeaway.dto.CommodityExecution;
+import com.jellyfishmix.gouhaitakeaway.dto.ImageHolder;
 import com.jellyfishmix.gouhaitakeaway.entity.Commodity;
 import com.jellyfishmix.gouhaitakeaway.enums.CommodityStateEnum;
 import com.jellyfishmix.gouhaitakeaway.service.CommodityService;
+import com.jellyfishmix.gouhaitakeaway.util.HttpServletRequestUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -45,16 +48,75 @@ public class CommodityController {
 
     /**
      * 添加商品
-     * @param commodity
+     * @param request
      * @return
      */
     @RequestMapping(value = "/addcommodity", method = RequestMethod.POST)
     @ResponseBody
-    private Map<String, Object> addCommodity(@RequestBody Commodity commodity) {
+    private Map<String, Object> addCommodity(HttpServletRequest request) {
         Map<String, Object> modelMap = new HashMap<String, Object>();
+        MultipartHttpServletRequest multipartHttpServletRequest;
+        ImageHolder thumbnail;
+        CommonsMultipartResolver commonsMultipartResolver = new CommonsMultipartResolver(request.getSession().getServletContext());
+
+        // 图片处理
+        try {
+            if (commonsMultipartResolver.isMultipart(request)) {
+                multipartHttpServletRequest = (MultipartHttpServletRequest) request;
+                // 取出略缩图并构建ImageHolder对象
+                CommonsMultipartFile thumbnailFile = (CommonsMultipartFile) multipartHttpServletRequest.getFile("imageFile");
+                if (thumbnailFile != null) {
+                    thumbnail = new ImageHolder(thumbnailFile.getOriginalFilename(), thumbnailFile.getInputStream());
+                } else {
+                    modelMap.put("success", false);
+                    modelMap.put("errMsg", "上传的图片不能为空");
+                    return modelMap;
+                }
+            } else {
+                modelMap.put("success", false);
+                modelMap.put("errMsg", "上传的图片不能为空");
+                return modelMap;
+            }
+        } catch (Exception e) {
+            modelMap.put("success", false);
+            modelMap.put("errMsg", e.toString());
+            return modelMap;
+        }
+
+        // entity处理
+        // String name = HttpServletRequestUtil.getString(request, "name");
+        // Integer originalPrice = HttpServletRequestUtil.getInt(request, "originalPrice");
+        // Integer currentPrice = HttpServletRequestUtil.getInt(request, "currentPrice");
+        // Boolean enable = HttpServletRequestUtil.getBoolean(request, "enable");
+        // String describe = HttpServletRequestUtil.getString(request, "describe");
+        // Integer sum = HttpServletRequestUtil.getInt(request, "sum");
+        // Boolean isUnderRevision = HttpServletRequestUtil.getBoolean(request, "isUnderRevision");
+        // Boolean isSeeMore = HttpServletRequestUtil.getBoolean(request, "isSeeMore");
+        // String imgURL = HttpServletRequestUtil.getString(request, "imgURL");
+
+        Commodity commodity = new Commodity();
+        // commodity.setName(name);
+        // commodity.setOriginalPrice(originalPrice);
+        // commodity.setCurrentPrice(currentPrice);
+        // commodity.setEnable(enable);
+        // commodity.setDescribe(describe);
+        // commodity.setSum(sum);
+        // commodity.setUnderRevision(isUnderRevision);
+        // commodity.setSeeMore(isSeeMore);
+        // commodity.setImgURL(imgURL);
+
+        commodity.setName("红薯");
+        commodity.setOriginalPrice(10);
+        commodity.setCurrentPrice(8);
+        commodity.setEnable(true);
+        commodity.setDescribe("暂无描述");
+        commodity.setSum(1);
+        commodity.setUnderRevision(false);
+        commodity.setSeeMore(false);
+        commodity.setImgURL("sssr");
 
         try {
-            CommodityExecution commodityExecution = commodityService.addCommodity(commodity);
+            CommodityExecution commodityExecution = commodityService.addCommodity(commodity, thumbnail);
             if (commodityExecution.getState() == CommodityStateEnum.SUCCESS.getState()) {
                 modelMap.put("success", true);
                 return modelMap;
