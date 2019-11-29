@@ -104,6 +104,7 @@
             <version>4.0.1</version>
             <scope>provided</scope>
         </dependency>
+
         <!--解析json。将实体类转换成json，或将json转换成实体类-->
         <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
         <dependency>
@@ -111,13 +112,7 @@
             <artifactId>jackson-databind</artifactId>
             <version>2.10.0</version>
         </dependency>
-        <!--fastJson，一种JSON字符串解析工具-->
-        <!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>fastjson</artifactId>
-            <version>1.2.62</version>
-        </dependency>
+
         <!--Map工具类。对标准Java Collection的扩展，spring-core.jar需commons-collections.jar-->
         <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-collections4 -->
         <dependency>
