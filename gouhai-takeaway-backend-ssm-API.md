@@ -43,7 +43,7 @@
      sum: int,	// 商品选购总和
      isUnderRevision: boolean,	// 是否处于编辑模式下
      isSeeMore: boolean,	// 是否处于气泡"查看更多"状态
-   	imageFile: File	// 图片文件
+     imageFile: File	// 图片文件
    }
    ```
 
@@ -84,7 +84,8 @@
 
    ```
    {
-     id: long	// 商品Id
+     id: long,	// 商品Id
+     imgRelativePath: String	// 商品图片存储位置相对路径
    }
    ```
 
@@ -135,7 +136,7 @@
 
    ```
    {
-   	orderId: long,	// 订单Id
+     orderId: long,	// 订单Id
      customerName: String,	// 顾客姓名
      customerPhone: String,	// 顾客手机号，请注意，该属性的值的数据类型为字符串
      customerAddr: String,	// 顾客地址
@@ -152,7 +153,7 @@
        totalPrice: int,	// 单项合计
        orderId: long	// 此订单商品的所属订单的Id
      },{
-     	orderCommodityId: long,	// 订单商品Id
+       orderCommodityId: long,	// 订单商品Id
        commodityName: String,	// 商品名字
        originalPrice: int, // 原价
        unitPrice: int,	// 单价，即现价
