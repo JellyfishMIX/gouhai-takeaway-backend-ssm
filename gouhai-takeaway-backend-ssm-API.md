@@ -84,8 +84,7 @@
 
    ```
    {
-     id: long,	// 商品Id
-     imgRelativePath: String	// 商品图片存储位置相对路径
+     id: long	// 商品Id
    }
    ```
 
