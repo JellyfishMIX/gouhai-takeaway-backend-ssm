@@ -158,6 +158,7 @@
             <version>0.4.8</version>
         </dependency>
 
+        <!--接收图片，需要在spring-web.xml中做适配-->
         <!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
         <dependency>
             <groupId>commons-fileupload</groupId>
