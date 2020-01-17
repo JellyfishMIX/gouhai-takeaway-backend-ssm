@@ -59,4 +59,4 @@ tomcat@9.0.26
 
 ### Deploy
 
-Alibaba Cloud ECS -- CentOS@7.4
+Alibaba Cloud ECS -- CentOS@7.3
